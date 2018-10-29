@@ -9,17 +9,17 @@ class Template
         $this->ci =& get_instance();
     }
 
-    /*
-        @name: load
-        @desc : Loads the template
-        @param:loc :location (admin or public)
-        @param:tpl_name :name of template
-        @param:data Optional Data Array
-    */
+    
+        // @name: load
+        // @desc : Loads the template
+        // @param:loc :location (admin or public)
+        // @param:tpl_name :name of template
+        // @param:data Optional Data Array
+    
 
     function load($loc , $tpl_name,$view,$data = null){
         if($loc == 'admin' && $tpl_name == 'default'){
-            $tpl_name == 'admin';
+            $tpl_name = 'admin';
         }
         if($loc == 'public' && $tpl_name == 'default'){
             $tpl_name = 'public';
