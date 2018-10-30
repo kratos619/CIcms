@@ -8,7 +8,8 @@ class Subjects extends CI_Controller
 	{
         //die('pages');
 	//	$this->load->view('welcome_message');
-		$this->template->load('admin','default','subjects/index');
+			$data['subjects'] = $this->subjects_model->get_list();
+		$this->template->load('admin','default','subjects/index',$data);
 	}
 
 	    public function add()
