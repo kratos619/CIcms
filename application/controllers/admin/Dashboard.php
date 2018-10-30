@@ -9,5 +9,6 @@ class Dashboard extends CI_Controller
 		//die('Dashboard');
 		//load template
 		$this->template->load('admin','default','dashboard');
+
 	}
 }
