@@ -22,5 +22,12 @@ class Subjects_model extends CI_Model
     }
 
 
+    public function delete_subjects($id){
+        $this->db->where('id',$id);
+        $this->db->delete('subjects');
+        return true;
+    }
+
+
 }
 

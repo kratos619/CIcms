@@ -51,10 +51,9 @@ class Subjects extends CI_Controller
 		$this->template->load('admin','default','subjects/edit');
 	}
 
-	    public function delete()
+	    public function delete($id)
 	{
-        die('subjects');
-	//	$this->load->view('welcome_message');
-		//$this->template->load('admin','default','pages/index');
+		$this->subjects_model->delete_subjects($id);
+		 redirect('admin/subjects');
 	}
 }
