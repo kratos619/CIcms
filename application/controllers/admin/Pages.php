@@ -4,8 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Pages extends CI_Controller 
 {
  
-    public function index()
-	{
+    public function index(){
         //die('pages');
 	//	$this->load->view('welcome_message');
 	$data['page_details'] = $this->pages_model->get_pages();
@@ -22,7 +21,7 @@ class Pages extends CI_Controller
 		$this->form_validation->set_rules('title','Title ','required');
 		$this->form_validation->set_rules('subject_id','Select Subject ','required');
 		$this->form_validation->set_rules('body','Content ','required');
-		$this->form_validation->set_rules('order','Select Order ','required');
+		//$this->form_validation->set_rules('order','Select Order ','required');
 		
 		if($this->form_validation->run() === false){
 			$data['subjects'] = $this->subjects_model->get_list();
@@ -57,16 +56,66 @@ class Pages extends CI_Controller
 		}
 	}
 
-	    public function edit()
+	    public function edit($id)
 	{
-        //die('pages');
-	//	$this->load->view('welcome_message');
-		$this->template->load('admin','default','pages/edit');
+        $this->form_validation->set_rules('title','Title ','required');
+		$this->form_validation->set_rules('subject_id','Select Subject ','required');
+		$this->form_validation->set_rules('body','Content ','required');
+//		$this->form_validation->set_rules('order','Select Order ','required');
+		
+		if($this->form_validation->run() === false){
+			$data['selected_page'] = $this->pages_model->get_page_by_id($id);
+
+			$data['all_cat'] = $this->subjects_model->get_list();
+		//die($id);
+			// echo '<pre> ';
+			// die(var_dump($data));
+			// echo '</pre>';
+		$this->template->load('admin','default','pages/edit' , $data);	
+		}else{
+			$slug = url_title($this->input->post('title'));
+			$data = array(
+				'title' => $this->input->post('title'),
+				'body' => $this->input->post('body'),
+				'subject_id' => $this->input->post('subject_id'),
+				'user_id' => 1,
+				'slug' => $slug,
+				'is_published' => $this->input->post('is_published'),
+				'is_fetured' => $this->input->post('is_fetured'),
+				'in_menu' => $this->input->post('in_menu')
+				
+			);
+
+			// insert data to db 
+		$this->pages_model->update_page($id,$data);
+		//load activity
+		$activity_data = array(
+            'resource_id' => $this->db->insert_id(),
+			'type' => 'Pages',
+			'action' => 'Update',
+			'user_id' => 1,
+			'message' => 'Page '. $data['title'] . ' Is Update' 		
+		);
+		// cal activity model
+		$this->activity_model->add_Activity($activity_data);
+		 redirect('admin/pages');
+		}
 	}
 
-	    public function delete()
+	    public function delete($id)
 	{
-        die('pages');
+			$page_name = $this->pages_model->get_page_by_id($id)->title;
+		$this->pages_model->delete_page($id);
+		 $activity_data = array(
+            'resource_id' => $this->db->insert_id(),
+			'type' => 'Pages',
+			'action' => 'Delete',
+			'user_id' => 1,
+			'message' => $page_name . ' has Been Deleted'		
+		);
+		// cal activity model
+		$this->activity_model->add_Activity($activity_data);
+		 redirect('admin/pages');
 	//	$this->load->view('welcome_message');
 		//$this->template->load('admin','default','pages/index');
 	}

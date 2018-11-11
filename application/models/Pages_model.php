@@ -17,11 +17,34 @@ class Pages_model extends CI_Model
 
     }
 
+    // get page by id
+
+    public function get_page_by_id($id)
+    {
+        $this->db->where('id',$id);
+     //   $this->db->join('subjects','subjects.id = pages.subject_id');
+        $query = $this->db->get('pages');
+        return $query->row();
+    }
+
     public function create_page($data)
     {
         return $this->db->insert('pages',$data);
     }
+
+    public function update_page($id,$data)
+    { 
+        $this->db->where('id',$id);
+       $this->db->update('pages',$data);
+    }
     
+    public function delete_page($id)
+    {
+        $this->db->where('id',$id);
+        $this->db->delete('pages');
+        return true;
+
+    }
     
 }
 

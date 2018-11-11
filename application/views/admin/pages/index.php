@@ -59,7 +59,9 @@
         <?php echo anchor('admin/pages/edit/'.$page->id,'Edit','class="btn btn-warning btn-sm"'); ?>
       </td>
       <td> 
-        <?php echo anchor('admin/pages/delete/'.$page->id,'Delete','class="btn btn-danger btn-sm"'); ?>
+        <?php echo form_open('admin/pages/delete/'.$page->id); ?>
+          <input type="submit" class="btn btn-danger btn-sm" value="delete">
+          <?php echo form_close(); ?>
       </td>
     </tr>
 <?php endforeach; ?>
