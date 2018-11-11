@@ -12,6 +12,13 @@ class Subjects_model extends CI_Model
         return $query->result();
     }
 
+    public function get($id)
+    {
+        $query = $this->db->get('subjects');
+        $this->db->where('id',$id);
+        return $query->row();
+    }
+
     public function create_subject(){
         $data = array(
             'name' => $this->input->post('name')
@@ -19,6 +26,13 @@ class Subjects_model extends CI_Model
 
         return $this->db->insert('subjects',$data);
 
+    }
+
+    public function update($id,$data)
+    {
+         
+        $this->db->where('id',$id);
+       $this->db->update('subjects',$data);
     }
 
 
