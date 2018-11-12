@@ -42,7 +42,7 @@
             <a class="nav-link" href="<?php echo base_url()?>">View Website</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?php echo base_url()?>users/logout">Logout</a>
+            <a class="nav-link" href="<?php echo base_url()?>admin/users/logout">Logout</a>
           </li>
         </ul>
         <!-- <form class="form-inline my-2 my-lg-0">

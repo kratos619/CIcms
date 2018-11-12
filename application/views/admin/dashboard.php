@@ -4,6 +4,7 @@
 <p>No Activitys</p>
 <?php } ?>
 
+<h1>welcome <?php echo $_SESSION['logged_in']; ?></h1>
 <ul class="list-group list-group-flush">
 <?php foreach($activities as $activity){ ?> 
 

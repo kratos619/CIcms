@@ -140,8 +140,12 @@ class Users extends CI_Controller
 			$user_id = $this->users_model->login_user($username,$password);
 			
 			if($user_id){
-                
-                redirect('admin');
+                $_SESSION['logged_in'] = $this->users_model->get_user_by_id($user_id)->id;
+				$_SESSION['username'] = $this->users_model->get_user_by_id($user_id)->username;
+				//$_SESSION['id'] = $this->users_model->get_user_by_id(user_id)->username;
+				//$_SESSION['logged_in'] = $this->users_model->get_user_by_id(user_id)->id;
+				
+				redirect('admin');
             }else{
                 
             $this->load->library('session');
@@ -149,5 +153,15 @@ class Users extends CI_Controller
                	$this->template->load('admin','login','users/login',$data);	
 			}
 		}
+	}
+
+	public function logout()
+	{
+		$this->session->unset_userdata('logged_in');
+        $this->session->unset_userdata('username');
+        $this->session->unset_userdata('user_id');
+        //$this->session->unset_userdata('name');
+        //$this->session->unset_userdata('logged_in');
+        redirect('admin/users/login');
 	}
 }
