@@ -37,4 +37,21 @@ class Users_model extends CI_Model
         $this->db->delete('users');
         return true;
     }
+
+    public function login_user($username,$password)
+    {
+        $query = $this->db->get('users' ,array(
+            'username' => $username,
+            //'password' => $password
+        ));
+        
+             $result = $query->row_array();
+            
+            if (password_verify($password, $result['password'])) {
+                return $result['id'];
+            } else {
+                return false;
+            }             
+    }
+
 }
