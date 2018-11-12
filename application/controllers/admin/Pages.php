@@ -48,7 +48,7 @@ class Pages extends CI_Controller
 			'type' => 'Pages',
 			'action' => 'add',
 			'user_id' => 1,
-			'message' => 'Page '. $data['title'] . ' Is Added' 		
+			'message' => 'Page ('. $data['title'] . ') Is Added' 		
 		);
 		// cal activity model
 		$this->activity_model->add_Activity($activity_data);
@@ -94,7 +94,7 @@ class Pages extends CI_Controller
 			'type' => 'Pages',
 			'action' => 'Update',
 			'user_id' => 1,
-			'message' => 'Page '. $data['title'] . ' Is Update' 		
+			'message' => 'Page ('. $data['title'] . ') Is Update' 		
 		);
 		// cal activity model
 		$this->activity_model->add_Activity($activity_data);
@@ -111,7 +111,7 @@ class Pages extends CI_Controller
 			'type' => 'Pages',
 			'action' => 'Delete',
 			'user_id' => 1,
-			'message' => $page_name . ' has Been Deleted'		
+			'message' => '('. $page_name . ') has Been Deleted'		
 		);
 		// cal activity model
 		$this->activity_model->add_Activity($activity_data);

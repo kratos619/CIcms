@@ -8,7 +8,10 @@ class Dashboard extends CI_Controller
 	{
 		//die('Dashboard');
 		//load template
-		$this->template->load('admin','default','dashboard');
+		
+		$data['activities'] = $this->activity_model->get_list();
+		//data['actiivities_by_date'] = $this->activity_model->get_activity_by_date()
+		$this->template->load('admin','default','dashboard',$data);
 
 	}
 }

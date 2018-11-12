@@ -36,7 +36,7 @@ class Subjects extends CI_Controller
             'resource_id' => $this->db->insert_id(),
 			'type' => 'subject',
 			'action' => 'added',
-			'message' => 'subject '. $data['name'] 		
+			'message' => 'subject ('. $data['name'] . ') ' 		
 		);
 		// cal activity model
 		$this->activity_model->add_Activity($activity_data);
@@ -67,7 +67,7 @@ class Subjects extends CI_Controller
             'resource_id' => $this->db->insert_id(),
 			'type' => 'subject',
 			'action' => 'update',
-			'message' => 'Old subject '. $old_name . ' was Removed and New Subject ' . $new_name  . ' Added '		
+			'message' => 'Old subject ('. $old_name . ') was Removed and New Subject (' . $new_name  . ') Added '		
 		);
 		// cal activity model
 		$this->activity_model->add_Activity($activity_data);
@@ -84,7 +84,7 @@ class Subjects extends CI_Controller
 			'type' => 'subject',
 			'action' => 'Delete',
 			'user_id' => 1,
-			'message' => $naem . ' has Been Deleted'		
+			'message' => '('. $name . ') has Been Deleted'		
 		);
 		// cal activity model
 		$this->activity_model->add_Activity($activity_data);

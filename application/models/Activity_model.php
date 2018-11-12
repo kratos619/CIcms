@@ -8,7 +8,9 @@ class Activity_model extends CI_Model
     }
 
     public function get_list(){
+        $this->db->order_by('create_date','desc');
         $query = $this->db->get('activity');
+
         return $query->result();
     }
 
