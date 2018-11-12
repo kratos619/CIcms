@@ -37,6 +37,7 @@ class Pages_model extends CI_Model
     { 
         $this->db->where('id',$id);
        $this->db->update('pages',$data);
+       return true;
     }
     
     public function delete_page($id)
