@@ -26,7 +26,8 @@ class Users extends CI_Controller
 		if($this->form_validation->run() === false){
 			//$data['subjects'] = $this->subjects_model->get_list();
 		$this->template->load('admin','default','users/add');	
-		}else{
+		
+	}else{
 		
 			$password = $this->input->post('confirm_password');
 			$username = $this->input->post('username'); 
@@ -126,6 +127,27 @@ class Users extends CI_Controller
 	}
 
 	public function login(){
+		$this->form_validation->set_rules('username','Username','required');
+		$this->form_validation->set_rules('password','Password','required');
+
+		if($this->form_validation->run() === false){
+
+		$this->template->load('admin','login','users/login');	
 		
+	}else{
+			 $username = $this->input->post('username');
+            $password = $this->input->post('password');
+			$user_id = $this->users_model->login_user($username,$password);
+			
+			if($user_id){
+                
+                redirect('admin');
+            }else{
+                
+            $this->load->library('session');
+                $data['login_failed'] =  $this->session->set_flashdata('login_failed', 'login is required');
+               	$this->template->load('admin','login','users/login',$data);	
+			}
+		}
 	}
 }
