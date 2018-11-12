@@ -1,4 +1,4 @@
-<h1 class="page-header">Subjects Index</h1>
+<h1 class="page-header">Pages Index</h1>
 
 <?php if($page_details == null){ ?>
 <p class="lead">No Details</p>
@@ -8,6 +8,7 @@
     <tr>
       <th scope="col">Id</th>
       <th scope="col">Title</th>
+      <th>Menu Name</th>
       <th scope="col">User Name</th>
       <th>Publish</th>
       <th>Featured</th>
@@ -24,6 +25,9 @@
       <th scope="row"><?php echo $page->id; ?></th>
       <td>
             <?php echo $page->title ; ?>
+      </td>
+      <td>
+        <?php echo $page->name; ?>
       </td>
       <td><?php echo $page->user_id; ?></td>
       <td>

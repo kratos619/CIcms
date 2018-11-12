@@ -12,6 +12,7 @@ class Pages_model extends CI_Model
 
     public function get_pages()
     {
+        $this->db->join('subjects','subjects.id = pages.subject_id');
        $query = $this->db->get('pages');
         return $query->result();
 
